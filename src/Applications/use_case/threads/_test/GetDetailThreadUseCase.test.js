@@ -22,6 +22,7 @@ describe('GetThreadByIdUseCase', () => {
         username: 'dicoding',
         date: new Date(),
         content: 'Comment Content',
+        likeCount: 0,
         isDeleted: false,
       }),
       new Comment({
@@ -29,6 +30,7 @@ describe('GetThreadByIdUseCase', () => {
         username: 'dicoding2',
         date: new Date(),
         content: 'Comment Content',
+        likeCount: 0,
         isDeleted: false,
       }),
     ];
@@ -87,6 +89,7 @@ describe('GetThreadByIdUseCase', () => {
         username: 'dicoding',
         date: expectedGetComments[0].date,
         content: 'Comment Content',
+        likeCount: 0,
         replies: [
           new Reply({
             id: 'reply-123',
@@ -111,6 +114,7 @@ describe('GetThreadByIdUseCase', () => {
         username: 'dicoding2',
         date: expectedGetComments[1].date,
         content: 'Comment Content',
+        likeCount: 0,
         replies: [
           new Reply({
             id: 'reply-456',

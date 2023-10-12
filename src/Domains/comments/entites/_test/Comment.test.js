@@ -13,6 +13,7 @@ describe('a Comment Entities', () => {
       username: 'dicoding',
       date: new Date(),
       content: 'Comment Content',
+      likeCount: 0,
       isDeleted: false,
     };
 
@@ -25,6 +26,7 @@ describe('a Comment Entities', () => {
       username: 'dicoding',
       date: new Date(),
       content: 'Comment Content',
+      likeCount: 0,
       isDeleted: false,
     };
 
@@ -42,6 +44,7 @@ describe('a Comment Entities', () => {
       username: 'dicoding',
       date: new Date(),
       content: 'Comment Content',
+      likeCount: 0,
       isDeleted: true,
     };
 
