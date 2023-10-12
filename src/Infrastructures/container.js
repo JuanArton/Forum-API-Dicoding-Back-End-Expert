@@ -35,6 +35,9 @@ const RepliesRepository = require('../Domains/replies/RepliesRepository');
 const RepliesRepositoryPostgres = require('./repository/threads/RepliesRepositoryPostgres');
 const AddReplyUseCase = require('../Applications/use_case/replies/AddReplyUseCase');
 const SoftDeleteReplyUseCase = require('../Applications/use_case/replies/SoftDeleteReplyUseCase');
+const LikeUseCase = require('../Applications/use_case/likes/LikeUseCase');
+const LikeRepository = require('../Domains/likes/LikesRepository');
+const LikeRepositoryPostgres = require('./repository/threads/LikeRepositoryPostgres');
 
 // creating container
 const container = createContainer();
@@ -121,10 +124,28 @@ container.register([
     Class: RepliesRepositoryPostgres,
     parameter: {
       dependencies: [
-        { concrete: pool },
-        { concrete: nanoid }
-      ]
-    }
+        {
+          concrete: pool,
+        },
+        {
+          concrete: nanoid,
+        },
+      ],
+    },
+  },
+  {
+    key: LikeRepository.name,
+    Class: LikeRepositoryPostgres,
+    parameter: {
+      dependencies: [
+        {
+          concrete: pool,
+        },
+        {
+          concrete: nanoid,
+        },
+      ],
+    },
   },
 ]);
 
@@ -232,7 +253,7 @@ container.register([
         {
           name: 'repliesRepository',
           internal: RepliesRepository.name,
-        }
+        },
       ],
     },
   },
@@ -242,14 +263,16 @@ container.register([
     parameter: {
       injectType: 'destructuring',
       dependencies: [
-        { name: 'threadRepository',
+        {
+          name: 'threadRepository',
           internal: ThreadRepository.name,
         },
-        { name: 'commentRepository',
+        {
+          name: 'commentRepository',
           internal: CommentRepository.name,
         },
-      ]
-    }
+      ],
+    },
   },
   {
     key: SoftDeleteCommentUseCase.name,
@@ -257,14 +280,16 @@ container.register([
     parameter: {
       injectType: 'destructuring',
       dependencies: [
-        { name: 'commentRepository',
+        {
+          name: 'commentRepository',
           internal: CommentRepository.name,
         },
-        { name: 'threadRepository',
+        {
+          name: 'threadRepository',
           internal: ThreadRepository.name,
-        }
-      ]
-    }
+        },
+      ],
+    },
   },
   {
     key: AddReplyUseCase.name,
@@ -284,8 +309,8 @@ container.register([
           name: 'repliesRepository',
           internal: RepliesRepository.name,
         },
-      ]
-    }
+      ],
+    },
   },
   {
     key: SoftDeleteReplyUseCase.name,
@@ -305,8 +330,29 @@ container.register([
           name: 'repliesRepository',
           internal: RepliesRepository.name,
         },
-      ]
-    }
+      ],
+    },
+  },
+  {
+    key: LikeUseCase.name,
+    Class: LikeUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          name: 'threadRepository',
+          internal: ThreadRepository.name,
+        },
+        {
+          name: 'commentRepository',
+          internal: CommentRepository.name,
+        },
+        {
+          name: 'likeRepository',
+          internal: LikeRepository.name,
+        },
+      ],
+    },
   },
 ]);
 

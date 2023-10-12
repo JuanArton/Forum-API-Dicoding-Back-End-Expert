@@ -7,7 +7,7 @@ class AddReply {
     this.content = content;
   }
 
-  _verifyPayload ({ content }) {
+  _verifyPayload({ content }) {
     if (!content) {
       throw new Error('ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
     }

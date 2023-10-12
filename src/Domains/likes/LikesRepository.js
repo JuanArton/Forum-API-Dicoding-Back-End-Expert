@@ -1,9 +1,9 @@
 class LikesRepository {
-  async likeComment (commentId, owner) {
+  async likeComment(commentId, owner) {
     throw new Error('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async dislikeComment (commentId, owner) {
+  async dislikeComment(commentId, owner) {
     throw new Error('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 

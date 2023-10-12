@@ -4,6 +4,7 @@ const AddCommentUseCase = require('../../../../Applications/use_case/comments/Ad
 const SoftDeleteCommentUseCase = require('../../../../Applications/use_case/comments/SoftDeleteCommentUseCase');
 const AddReplyUseCase = require('../../../../Applications/use_case/replies/AddReplyUseCase');
 const SoftDeleteReplyUseCase = require('../../../../Applications/use_case/replies/SoftDeleteReplyUseCase');
+const LikeUseCase = require('../../../../Applications/use_case/likes/LikeUseCase');
 
 class ThreadsHandler {
   constructor(container) {
@@ -102,6 +103,19 @@ class ThreadsHandler {
     });
 
     return { status: 'success' };
+  }
+
+  async likeOrDislikeCommentHandler(request) {
+    const { id: owner } = request.auth.credentials;
+    const { threadId, commentId } = request.params;
+
+    const likeUseCase = this._container.getInstance(LikeUseCase.name);
+
+    await likeUseCase.execute({ threadId, commentId, owner });
+
+    return {
+      status: 'success',
+    };
   }
 }
 

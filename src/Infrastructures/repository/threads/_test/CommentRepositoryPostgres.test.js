@@ -136,7 +136,7 @@ describe('CommentsRepositoryPostgres', () => {
     });
 
     it('should return array of comments with expected comment value', async () => {
-      const repo = new CommentRepositoryPostgres(pool, {});
+      const repository = new CommentRepositoryPostgres(pool, {});
 
       await CommentTableTestHelper.addComment({
         id: 'comment-123',
@@ -152,7 +152,7 @@ describe('CommentsRepositoryPostgres', () => {
 
       await CommentTableTestHelper.deleteComment('comment-abc');
 
-      const comment = await repo.getCommentByThreadId(dummyThread.id);
+      const comment = await repository.getCommentByThreadId(dummyThread.id);
 
       expect(comment[0].id).toStrictEqual('comment-123');
       expect(comment[0].username).toStrictEqual(dummyUser.username);
